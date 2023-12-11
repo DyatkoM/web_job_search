@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="{% url 'users:registration' %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label class="form_name" for="{{ form.first_name.id_for_label }}">Имя:</label>
+        {{ form.first_name }}
+    </div>
+    <div class="form-group">
+        <label class="form_last_name" for="{{ form.last_name.id_for_label }}">Фамилия:</label>
+        {{ form.last_name }}
+    </div>
+    <div class="form-group">
+        <label class="form_email" for="{{ form.email.id_for_label }}">Адрес электронной почты </label>
+        {{ form.email }}
+    </div>
+    <div class="form-group">
+        <label class="form_username" for="{{ form.username.id_for_label }}">Имя на сайте </label>
+        {{ form.username }}
+    </div>
+    <div class="form-group">
+        <label class="form_checkbox" for="{{ form.is_employer.id_for_label }}">Вы работодатель? </label>
+        {{ form.is_employer }}
+    </div>
+    <div class="form-group">
+        <label class="form_password1" for="{{ form.password1.id_for_label }}">Пароль </label>
+        {{ form.password1 }}
+    </div>
+    <div class="form-group">
+        <label class="form_password2" for="{{ form.password2.id_for_label }}">Повторный пароль </label>
+        {{ form.password2 }}
+    </div>
+    <button type="submit">Загрузить</button>
+</form>
+
+</body>
+</html>
