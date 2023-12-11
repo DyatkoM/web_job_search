@@ -4,7 +4,7 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="    --bs-bg-opacity: 0; padding:20px;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">{{ request.user }}</a>
+            <a class="navbar-brand" href="#">Добро пожаловать {{ request.user }}!</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -12,24 +12,27 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'main_page' %}">Home</a>
-                    </li>
                     {% if request.user.is_authenticated %}
-                    {% if request.user.is_employer %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'all_vacancy' %}">Vacancy</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'all_vacancy' %}">Вакансии</a>
                     </li>
-                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Резюме</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
+                    </li>
                     {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:login' %}">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'users:registration' %}">Регистрация</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-
-    <a class="navbar-brand" href="#">{{ request.user.username }}</a>
-    <a href="{% url 'users:login' %}">login</a>
-    <a href="{% url 'users:registration' %}">registration</a>
 </div>
 {% endblock content %}
