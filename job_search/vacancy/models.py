@@ -13,3 +13,12 @@ class Vacancy(models.Model):
     conditions = models.CharField(null=True, blank=True)
     contacts = models.CharField(null=True, blank=True)
     skills = models.CharField(null=True, blank=True)
+    time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['time']
+
+    objects = models.Manager()
