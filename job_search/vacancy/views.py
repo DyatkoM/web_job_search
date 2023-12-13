@@ -1,10 +1,48 @@
 from django.shortcuts import render
 from .models import Vacancy
+from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.edit import (
+    CreateView,
+    UpdateView,
+)
+from .forms import CreateForm
 
 
-# Create your views here.
+def vacancy_create(request):
+    if request.method == "POST":
+        form = CreateForm(data=request.POST)
+        if form.is_valid():
+            title = request.POST['title']
+
+            user = request.user
+            form.instance.user = user  # Привязываем текущего пользователя к полю user
+            salary = request.POST['salary']
+            if len(salary) > 15000:
+                error_message = "А вы точно будете столько платить?)"
+                context = {'form': form, 'error_message_salary': error_message}
+                return render(request, 'vacancy/create_vacancy.html', context)
+            work_experience = request.POST['work_experience']
+            duties = request.POST['duties']
+            requirements = request.POST['requirements']
+            contacts = request.POST['contacts']
+            skills = request.POST['skills']
+            if len(title) > 6000:
+                error_message = "Вы привысили ограничение по символам"
+                context = {'form': form, 'error_message_title': error_message}
+                return render(request, 'vacancy/create_vacancy.html', context)
+
+            form.save()
+            context = {'form': form}
+            return render(request, 'vacancy/list_vacancy.html', context)
+
+    else:
+        form = CreateForm()
+    context = {'form': form}
+    return render(request, 'vacancy/create_vacancy.html', context)
+
+
 class ShowVacancy(ListView, LoginRequiredMixin):
     model = Vacancy
     fields = [
