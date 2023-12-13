@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Vacancy
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
@@ -15,27 +15,16 @@ def vacancy_create(request):
         form = CreateForm(data=request.POST)
         if form.is_valid():
             title = request.POST['title']
-
             user = request.user
             form.instance.user = user  # Привязываем текущего пользователя к полю user
             salary = request.POST['salary']
-            if len(salary) > 15000:
-                error_message = "А вы точно будете столько платить?)"
-                context = {'form': form, 'error_message_salary': error_message}
-                return render(request, 'vacancy/create_vacancy.html', context)
             work_experience = request.POST['work_experience']
             duties = request.POST['duties']
             requirements = request.POST['requirements']
             contacts = request.POST['contacts']
             skills = request.POST['skills']
-            if len(title) > 6000:
-                error_message = "Вы привысили ограничение по символам"
-                context = {'form': form, 'error_message_title': error_message}
-                return render(request, 'vacancy/create_vacancy.html', context)
-
             form.save()
-            context = {'form': form}
-            return render(request, 'vacancy/list_vacancy.html', context)
+            return redirect('all_vacancy')
 
     else:
         form = CreateForm()
