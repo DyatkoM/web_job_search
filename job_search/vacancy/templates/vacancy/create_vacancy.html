@@ -1,10 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'employer_app/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="    --bs-bg-opacity: 0; padding:20px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">{{ request.user }}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'main_page' %}">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-</body>
-</html>
+    <form action="{% url 'vacancy_create' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label class="form_title" for="{{ form.title.id_for_label }}">Заголовок:</label>
+            {{ form.title }}
+            {% if form.title.errors %}
+            <div class="error-message">{{ form.title.errors }}</div>
+            {% endif %}
+
+        </div>
+        <div class="form-group">
+            <label class="form_salary" for="{{ form.salary.id_for_label }}">Зарплата:</label>
+            {{ form.salary }}
+            {% if form.salary.errors %}
+            <div class="error-message">{{ form.salary.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form_work_experience" for="{{ form.work_experience.id_for_label }}">Опыт работы:</label>
+            {{ form.work_experience }}
+            {% if form.work_experience.errors %}
+            <div class="error-message">{{ form.work_experience.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form_duties" for="{{ form.requirements.id_for_label }}">Обязанности:</label>
+            {{ form.duties }}
+            {% if form.duties.errors %}
+            <div class="error-message">{{ form.duties.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form_requirements" for="{{ form.requirements.id_for_label }}">Требования:</label>
+            {{ form.requirements }}
+            {% if form.requirements.errors %}
+            <div class="error-message">{{ form.requirements.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form_conditions" for="{{ form.conditions.id_for_label }}">Условия:</label>
+            {{ form.conditions }}
+            {% if form.conditions.errors %}
+            <div class="error-message">{{ form.conditions.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form_contacts" for="{{ form.contacts.id_for_label }}">Контакты и адрес:</label>
+            {{ form.contacts }}
+            {% if form.contacts.errors %}
+            <div class="error-message">{{ form.contacts.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            <label class="form_skills" for="{{ form.skills.id_for_label }}">Ключевые навыки:</label>
+            {{ form.skills }}
+            {% if form.skills.errors %}
+            <div class="error-message">{{ form.skills.errors }}</div>
+            {% endif %}
+        </div>
+
+
+        <button type="submit">Загрузить</button>
+    </form>
+</div>
+{% endblock content %}

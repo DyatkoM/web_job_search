@@ -16,18 +16,45 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'main_page' %}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'page_all_post' %}">Forum</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'vacancy_create' %}">создать
+                            вакансию</a>
                     </li>
-                    <li class="nav-item">
-                        {% if request.user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                        {% else %}
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        {% endif %}
-                    </li>
+
                 </ul>
+                <form class="d-flex" role="search">
+                    <form action="" method="get">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                               name="search-area">
+                        <button class="btn btn-outline-success" type="submit" name="Search">Search</button>
+                    </form>
+                </form>
             </div>
         </div>
     </nav>
+    {% for foto in list_vacancy %}
+    <tr>
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{foto.user}}</h4>
+                <h6 class="card-subtitle mb-2 text-muted">{{foto.title|truncatechars:500}}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Зарплата: {{foto.salary}}$</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ foto.work_experience|truncatechars:500 }}</h6>
+                <h6 class="card-subtitle mb-2 text-muted">{{ foto.skills|truncatechars:40 }}</h6>
+                <p class="card-text">
+
+                </p>
+                <p class="card-text">
+
+                </p>
+                <a href="#!" class="card-link">Card link</a>
+                <a href="#!" class="card-link">Another link</a>
+            </div>
+        </div>
+    </tr>
+    <tr>
+    </tr>
+    {% empty %}
+    <h3> No post any user, create your!!!</h3>
+    {% endfor %}
 </div>
 {% endblock content %}
