@@ -72,7 +72,7 @@
 </style>
 {% endblock css %}
 {% block content %}
-<title>регистрация</title>
+<title>Вход</title>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">Название сайта \(-_-)\</a>
@@ -95,7 +95,7 @@
     </nav>
     <div class="contain">
 
-        <h2>Регистрация</h2>
+        <h2>Вход</h2>
         <form action="{% url 'users:login' %}" method="post">
             {% csrf_token %}
             <div class="form-group">
