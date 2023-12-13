@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class Vacancy(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(null=True, blank=True)
-    salary = models.CharField(null=True, blank=True)
+    salary = models.IntegerField(default=0, null=True, blank=True)
     work_experience = models.CharField(null=True, blank=True)
     duties = models.CharField(null=True, blank=True)
     requirements = models.CharField(null=True, blank=True)
