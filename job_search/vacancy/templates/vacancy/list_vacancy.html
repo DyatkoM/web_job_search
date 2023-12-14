@@ -2,35 +2,41 @@
 {% load static %}
 {% block content %}
 <div class="container">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="    --bs-bg-opacity: 0; padding:20px;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">{{ request.user }}</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'main_page' %}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'vacancy_create' %}">создать
-                            вакансию</a>
-                    </li>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {% if request.user.is_authenticated %}
+        <a class="navbar-brand" href="#">Название сайта!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{%url 'main_page'%}">Главная страница</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active" aria-current="page" href="{% url 'all_vacancy' %}">Вакансии<span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Резюме</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
+                </li>
 
-                </ul>
-                <form class="d-flex" role="search">
-                    <form action="" method="get">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                               name="search-area">
-                        <button class="btn btn-outline-success" type="submit" name="Search">Search</button>
-                    </form>
+            </ul>
+            <form class="d-flex" role="search">
+                <form action="" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                           name="search-area">
+                    <button class="btn btn-outline-success" type="submit" name="Search">Search</button>
                 </form>
-            </div>
+            </form>
         </div>
     </nav>
+    {% endif %}
+
     {% for foto in list_vacancy %}
     <tr>
         <div class="card">
