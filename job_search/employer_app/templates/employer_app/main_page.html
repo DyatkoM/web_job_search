@@ -1,38 +1,70 @@
 {% extends 'employer_app/base.html' %}
 {% load static %}
+{% block css %}
+<style>
+    body {
+        font-family: 'Kalnia', serif;
+        }
+.top{
+ color:#000000;
+ text-align:center;
+ padding-top:0px;
+ padding-bottom:50px;
+ position: absolute;
+  top: 30%; /* Регулируйте положение класса top по вертикали по вашим потребностям */
+  left: 50%; /* Регулируйте положение класса top по горизонтали по вашим потребностям */
+  transform: translate(-50%, -50%); /* Центрируем класс top относительно карусели */
+  z-index: 2;
+
+}
+</style>
+{% endblock css %}
 {% block content %}
 <div class="container">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="    --bs-bg-opacity: 0; padding:20px;">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Добро пожаловать {{ request.user }}!</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'all_vacancy' %}">Вакансии</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Резюме</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:login' %}">Вход</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'users:registration' %}">Регистрация</a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {% if request.user.is_authenticated %}
+        <a class="navbar-brand" href="#">Добро пожаловать {{ request.user }}!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link active" aria-current="page" href="{% url 'all_vacancy' %}">Вакансии<span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Резюме</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:logout' %}">Выход</a>
+                </li>
+            </ul>
         </div>
+        {% else %}
+        <a class="navbar-brand" href="#">Название сайта!</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2"
+                aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'users:login' %}">Вход</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:registration' %}">Регистрация</a>
+                </li>
+            </ul>
+        </div>
+        {% endif %}
     </nav>
+    <div>
+        <section class="top">
+                <h3 class="title">Сайт для поиска работы</h3>
+                <h3 class="title">Найдите работу вместе с нами!</h3>
+        </section>
+    </div>
 </div>
 {% endblock content %}
