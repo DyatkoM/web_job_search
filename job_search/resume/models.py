@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Resume(models.Model):
     user = models.ForeignKey('users.User', on_delete=models.CASCADE, blank=True, null=True)
+    user_photo = models.ImageField(upload_to='media/')
     title = models.CharField(null=True, blank=True)
     salary = models.IntegerField(default=0, null=True, blank=True)
     work_experience = models.CharField(null=True, blank=True)
