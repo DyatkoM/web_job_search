@@ -9,8 +9,7 @@ class CreateForm(forms.ModelForm):
         'class': 'form_salary', 'placeholder': 'Заработная плата:'}))
     work_experience = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form_work_experience', 'placeholder': 'Опыт работы:'}))
-    conditions = forms.CharField(widget=forms.TextInput(attrs={
-        'class': 'form_conditions', 'placeholder': 'Условия:'}))
+
     contacts = forms.CharField(widget=forms.TextInput(attrs={
         'class': 'form_contacts', 'placeholder': 'Контакты и адрес:'}))
     skills = forms.CharField(widget=forms.TextInput(attrs={
@@ -20,6 +19,5 @@ class CreateForm(forms.ModelForm):
         model = Resume
         fields = [
             'title', 'salary', 'work_experience',
-            'duties', 'requirements', 'conditions',
             'contacts', 'skills'
         ]
